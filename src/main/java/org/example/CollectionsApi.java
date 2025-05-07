@@ -4,8 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CollectionsApi {
-    public static void doBasic()
-    {
+    public static void doBasic() {
         // ArrayList
         List<String> strArrList = new ArrayList<>();
 
@@ -54,8 +53,7 @@ public class CollectionsApi {
         System.out.println(hashMap.get(1));
     }
 
-    public static void doStreamApiTaskOne()
-    {
+    public static void doStreamApiTaskOne() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         String res = numbers
                 .stream()
@@ -66,31 +64,27 @@ public class CollectionsApi {
         System.out.println("Task one: " + res);
     }
 
-    public static void doStreamApiTaskTwo()
-    {
+    public static void doStreamApiTaskTwo() {
         List<String> words = List.of("apple", "banana", "cherry", "kiwi", "pear", "melon");
         // Length are keys, and words are vales as List<String>
         Map<Integer, List<String>> groupedWords = words.stream().collect(Collectors.groupingBy(String::length));
         System.out.println("Task two: " + groupedWords);
     }
 
-    public static void doStreamApiTaskThree()
-    {
+    public static void doStreamApiTaskThree() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         Long res = numbers.stream().filter(number -> number % 2 == 1).collect(Collectors.counting());
         System.out.println("Task three: " + res);
     }
 
-    public static void doStreamApiTaskFour()
-    {
+    public static void doStreamApiTaskFour() {
         List<Integer> numbers = List.of(10, 20, 30, 40, 50);
         IntSummaryStatistics numberStats =  numbers.stream().collect(Collectors.summarizingInt(Integer::valueOf));
         System.out.println("Task four: " + numberStats);
         System.out.printf("Task four extra: Max: %d, Min: %d, Average: %.2f, Count: %d\n", numberStats.getMax(), numberStats.getMin(), numberStats.getAverage(), numberStats.getCount());
     }
 
-    public static void doStreamTaskFive()
-    {
+    public static void doStreamTaskFive() {
         List<Integer> numbers = List.of(5, 3, 8, 3, 1, 5, 9, 1, 2);
         // V1
         Set<Integer> sortedNumbers = numbers.stream().sorted().collect(Collectors.toSet());
@@ -98,5 +92,18 @@ public class CollectionsApi {
         List<Integer> sortedNumbersV2 = numbers.stream().distinct().sorted().toList();
         System.out.println("Task five v1: " + sortedNumbers);
         System.out.println("Task five v2: " + sortedNumbersV2);
+    }
+
+    public static void hashCodeEquals() {
+        HashMap<Person, String> map = new HashMap<>();
+
+        Person p1 = new Person("Alice", 25);
+        Person p2 = new Person("Alice", 25);
+
+        map.put(p1, "Engineer");
+
+        // Normally, different reference types have different hashcode and we cant access p1's value even p2 is equal to p1, but if we override the methods, we can get the value we want
+        System.out.println("p1 equals p2? " + p1.equals(p2)); // false -> true with override equals
+        System.out.println("Get with p2: " + map.get(p2)); // null -> value with override hashCode
     }
 }

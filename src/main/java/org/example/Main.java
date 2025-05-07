@@ -10,5 +10,6 @@ public class Main {
         CollectionsApi.doStreamApiTaskThree();
         CollectionsApi.doStreamApiTaskFour();
         CollectionsApi.doStreamTaskFive();
+        CollectionsApi.hashCodeEquals();
     }
 }
